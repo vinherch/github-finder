@@ -1,7 +1,26 @@
-import React from "react";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const NotFound = () => {
-  return <div>Page Not Found</div>;
+  useEffect(() => {
+    document.title = "Page Not Found";
+  }, []);
+
+  return (
+    <div>
+      <div className="hero">
+        <div className="text-center hero-content">
+          <div className="max-w-lg">
+            <h1 className="text-8xl font-bold mb-8">Oops!</h1>
+            <p className="text-5xl mb-8">404 - Page not found!</p>
+            <Link to="/" className="btn btn-primary btn-lg mt-5">
+              back to home
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default NotFound;
