@@ -31,10 +31,10 @@ const UserSearch = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 gap-8 mb-9 ">
-      <div>
+    <div className="flex flex-col md:flex-row md:justify-between md:mb-12">
+      <div className="flex-1">
         <form className="form-control" onSubmit={handleSubmit}>
-          <div className="relative">
+          <div className="relative ">
             <input
               value={text}
               onChange={handleChange}
@@ -49,7 +49,7 @@ const UserSearch = () => {
         </form>
       </div>
       {users.length > 0 && (
-        <div className="flex md:justify-start sm:justify-center">
+        <div className="flex justify-end md:justify-start sm:justify-center">
           <button className="btn btn-ghost btn-lg" onClick={clearUsers}>
             Clear
           </button>

@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Width Scrolbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.user-results {
+  max-height: 50vh;
+}
+
+@media screen and (min-width: 768px) {
+  .user-results {
+    max-height: 60vh;
+  }
+}
