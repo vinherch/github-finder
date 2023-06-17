@@ -5,13 +5,15 @@ import { FaCodepen, FaStore, FaUserFriends, FaUsers } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../components/layout/LoadingSpinner";
 import GitHubContext from "../context/github/GitHubContext";
+import RepositoryList from "../components/repositories/RepositoryList";
 
 const User = () => {
-  const { getUser, user, isLoading } = useContext(GitHubContext);
+  const { getUser, user, isLoading, getUserRepositories, repositories } = useContext(GitHubContext);
   const params = useParams();
 
   useEffect(() => {
     getUser(params.user);
+    getUserRepositories(params.user);
   }, []);
 
   const {
@@ -123,6 +125,7 @@ const User = () => {
             </div>
           </div>
         </div>
+        <RepositoryList repositories={repositories} />
       </div>
     </>
   );
