@@ -15,56 +15,14 @@ export const GitHubProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(gitHubReducer, initialState);
 
-  //Search users from search component
-  const searchUsers = async (searchText) => {
-    setIsLoading();
-    /* Create search params */
-    const params = new URLSearchParams({
-      q: searchText,
-    });
-    const res = await fetch(`${process.env.REACT_APP_GITHUB_URL}/search/users?${params}`);
-    const data = res.ok ? await res.json() : null;
-    if (data) {
-      dispatch({ type: "GET_USERS", data: data.items });
-    }
-  };
-
-  //Fetch single user / user details
-  const getUser = async (username) => {
-    setIsLoading();
-    //Fetch user data
-    const res = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${username}`);
-    if (res.status === 404) {
-      window.location("/notfound");
-      return;
-    }
-    const data = res.ok ? await res.json() : null;
-    if (data) {
-      dispatch({ type: "GET_USER", data });
-    }
-  };
-
-  //Get repositories from user
-  const getUserRepositories = async (user) => {
-    setIsLoading();
-    const params = new URLSearchParams({
-      sort: "created",
-    });
-    const res = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${user}/repos?${params}`);
-    const data = res.ok ? await res.json() : null;
-    if (data) {
-      dispatch({ type: "GET_REPOSITORIES", data });
-    }
-  };
-
-  /* Change isLoading state in reducer */
-  const setIsLoading = () => {
-    dispatch({ type: "SET_ISLOADING" });
-  };
-
-  /* Clear users from state */
+  //Clear users from state
   const clearUsers = () => {
     dispatch({ type: "CLEAR_USERS" });
+  };
+
+  //Set isLoading to true
+  const setIsLoading = () => {
+    dispatch({ type: "SET_ISLOADING" });
   };
 
   return (
@@ -74,10 +32,9 @@ export const GitHubProvider = ({ children }) => {
         user: state.user,
         isLoading: state.isLoading,
         repositories: state.repositories,
-        searchUsers,
-        getUser,
+        dispatch,
         clearUsers,
-        getUserRepositories,
+        setIsLoading,
       }}
     >
       {children}

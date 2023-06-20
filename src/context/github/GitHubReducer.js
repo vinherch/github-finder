@@ -6,6 +6,8 @@ const gitHubReducer = (state, action) => {
       return { ...state, user: action.data, isLoading: false };
     case "GET_REPOSITORIES":
       return { ...state, repositories: action.data, isLoading: false };
+    case "GET_USER_AND_REPOSITORIES":
+      return { ...state, user: action.data.user, repositories: action.data.repositories, isLoading: false };
     case "SET_ISLOADING":
       return { ...state, isLoading: true };
     case "CLEAR_USERS":

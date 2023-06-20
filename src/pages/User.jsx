@@ -5,15 +5,25 @@ import { FaCodepen, FaStore, FaUserFriends, FaUsers } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../components/layout/LoadingSpinner";
 import GitHubContext from "../context/github/GitHubContext";
+import { getUserAndRepositories } from "../context/github/GitHubActions";
 import RepositoryList from "../components/repositories/RepositoryList";
 
 const User = () => {
-  const { getUser, user, isLoading, getUserRepositories, repositories } = useContext(GitHubContext);
+  //Get URL params
   const params = useParams();
 
+  //Get data from context
+  const { user, isLoading, setIsLoading, repositories, dispatch } = useContext(GitHubContext);
+
+  //Fetch user data & repositories
+  const getData = async () => {
+    const userData = await getUserAndRepositories(params.user);
+    dispatch({ type: "GET_USER_AND_REPOSITORIES", data: userData });
+  };
+
   useEffect(() => {
-    getUser(params.user);
-    getUserRepositories(params.user);
+    setIsLoading();
+    getData();
   }, []);
 
   const {
