@@ -4,12 +4,12 @@ import alertReducer from "./AlertReducer";
 const AlertContext = createContext();
 
 export const AlertProvider = ({ children }) => {
-  /* Initial state Reducer */
+  // Initial state - Reducer
   const initialState = null;
 
   const [state, dispatch] = useReducer(alertReducer, initialState);
 
-  /* Set an alert */
+  // Set alert
   const setAlert = (msg, type) => {
     dispatch({ type: "SET_ALERT", payload: { msg, type } });
     /* After 3 seconds alert will be removed */
